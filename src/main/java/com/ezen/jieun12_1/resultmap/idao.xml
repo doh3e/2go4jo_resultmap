@@ -1,0 +1,39 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.ezen.jieun12_1.resultmap.Service">
+
+<resultMap type="com.ezen.jieun12_1.resultmap.ScoreDTO" id="scdto">
+	<result property="id" column="id"/>
+	<result property="kor" column="kor"/>
+	<result property="eng" column="eng"/>
+	<result property="mat" column="mat"/>
+</resultMap>
+<resultMap type="com.ezen.jieun12_1.resultmap.InsaDTO" id="indto">
+	<result property="id" column="id"/>
+	<result property="position" column="position"/>
+	<result property="sudang" column="sudang"/>
+	<result property="money" column="money"/>
+</resultMap>
+<resultMap type="com.ezen.jieun12_1.resultmap.MyinfoDTO" id="mydto">
+	<result property="id" column="id"/>
+	<result property="name" column="name"/>
+	<result property="tel" column="tel"/>
+	<collection property="scoredto" ofType="com.ezen.jieun12_1.resultmap.ScoreDTO" resultMap="scdto"></collection>
+	<collection property="insadto" ofType="com.ezen.jieun12_1.resultmap.InsaDTO" resultMap="indto"></collection>
+</resultMap>
+
+<select id="print" resultMap="mydto">
+	select my.id, my.name, my.tel,
+	sc.kor,sc.eng,sc.mat,
+	ins.position,ins.sudang,ins.money
+	from myinfo0319 my, score0319 sc, insa0319 ins
+    where my.id = sc.id and sc.id = ins.id
+</select>
+
+<select id="print2" resultType="com.ezen.jieun12_1.resultmap.MyinfoDTO">
+	select * from myinfo0319
+</select>
+
+</mapper>
