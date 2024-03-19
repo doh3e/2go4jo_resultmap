@@ -1,0 +1,113 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 화요일-3월-19-2024   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Sequence BNUM_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."BNUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 10020 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence BNUM_SEQQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."BNUM_SEQQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 120 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence BONUM_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."BONUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence BOOKN_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."BOOKN_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 120 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence BUNHO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."BUNHO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100020 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence B_NUMBER_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."B_NUMBER_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1000 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence CBUNHO_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."CBUNHO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1000000 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence QUESTION_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."QUESTION_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence RESERVATION_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."RESERVATION_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence REVIEW_NUM_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."REVIEW_NUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SANG_NUMBER_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."SANG_NUMBER_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 10020 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SNUM_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."SNUM_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1020 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SNUM_SEQQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."SNUM_SEQQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 10020 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SPNUMBER_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EZEN"."SPNUMBER_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Table INSA0319
+--------------------------------------------------------
+
+  CREATE TABLE "EZEN"."INSA0319" 
+   (	"ID" NUMBER, 
+	"POSITION" VARCHAR2(20 BYTE), 
+	"SUDANG" NUMBER(10,0), 
+	"MONEY" NUMBER(10,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+REM INSERTING into EZEN.INSA0319
+SET DEFINE OFF;
+Insert into EZEN.INSA0319 (ID,POSITION,SUDANG,MONEY) values (1001,'대리',30000,500000);
+Insert into EZEN.INSA0319 (ID,POSITION,SUDANG,MONEY) values (1002,'과장',20000,800000);
+Insert into EZEN.INSA0319 (ID,POSITION,SUDANG,MONEY) values (1003,'상무',100000,1000000);
+Insert into EZEN.INSA0319 (ID,POSITION,SUDANG,MONEY) values (1004,'전무',300000,2000000);
+--------------------------------------------------------
+--  DDL for Function GET_GRADE
+--------------------------------------------------------
+
+  CREATE OR REPLACE FUNCTION "EZEN"."GET_GRADE" (p_score NUMBER, p_subject VARCHAR2) RETURN VARCHAR2 IS
+    v_grade VARCHAR2(10);
+BEGIN
+    SELECT MIN(g.grade) INTO v_grade
+    FROM ezenedu_score_grade g
+    WHERE p_score >= g.svalue
+    AND g.subject = p_subject;
+
+    RETURN v_grade;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN NULL;
+END;
+
+
+/
