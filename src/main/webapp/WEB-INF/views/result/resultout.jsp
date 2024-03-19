@@ -17,7 +17,7 @@
 <tr>
 	<th>아이디</th><th>이름</th><th>전화번호</th><th>총점</th><th>직위</th><th>월급</th>
 </tr>
-<c:forEach var="i" begin="0" end="${fn:length(list)}">
+<c:forEach var="i" begin="0" end="${fn:length(list)-1}">
 <tr>
 	<td>${list.get(i).id}</td>
 	<td>${list.get(i).name}</td>
